@@ -39,7 +39,7 @@ function setupTogglePins() {
     });
 }
 
-function pinDrop(options) {
+function pinDrop2(options) {
     const imgContainer = $(options.imgContainerSelector);
     const removeAllButton = $(options.removeAllButtonSelector);
     const confirmMessage = options.confirmMessage || 'Tem certeza que quer apagar todos os pinos do mapa?';
