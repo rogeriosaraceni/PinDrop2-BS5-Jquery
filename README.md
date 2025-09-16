@@ -1,4 +1,4 @@
-# pinDrop Jquery
+# pinDrop2 Jquery
 
 **pinDrop** é um plugin em jQuery que permite arrastar e soltar pinos sobre uma imagem (mapa), podendo movê-los, removê-los, contar quantos existem por categoria e limpar todos de uma vez.  
 Ideal para mapas interativos, plantas baixas ou qualquer aplicação visual que exija posicionamento dinâmico de marcadores.

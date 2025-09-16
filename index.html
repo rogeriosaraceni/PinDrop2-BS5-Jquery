@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title>PinDrop Jquery</title>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="./assets/css/styles.css">
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="./assets/js/main.js" defer></script>
+        <script src="./assets/js/inputNumberNoString.js" defer></script>
+    </head>
+
+    <body>
+        <section class="container-fluid py-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <section class="row">
+                        <div class="col-lg-6 mb-2 pe-3">
+                            <div class="d-flex flex-column">
+                                <div class="panel-btns">
+                                    <div class="d-flex gap-3">
+                                        <a class="text-primary" title="Ampliar" data-fancybox  data-src="./assets/img/planta.jpg">
+                                            <i class="bi bi-zoom-in"></i>
+                                        </a>
+
+                                        <a class="text-danger" title="Excluir" data-image="del" href="#">
+                                            <i class="bi bi-x-circle-fill"></i>
+                                        </a>
+                                    </div>
+
+                                    <button id="removeAllButtonPinsProposta" class="btn btn-sm btn-danger mb-0" disabled="disabled">Remover Pins</button>
+                                </div>
+
+                                <section class="container-img-pins">
+                                    <div class="wrapper-imgUpload">
+                                        <div class="content-imgUpload" data-containerPin="proposta">
+                                            <img src="./assets/img/planta.jpg">
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 mb-2 ps-3">
+                            <div class="d-flex flex-column">
+                                <div class="panel-btns">
+                                    <div class="d-flex gap-3">
+                                        <a class="text-primary" title="Ampliar" data-fancybox  data-src="./assets/img/planta.jpg">
+                                            <i class="bi bi-zoom-in"></i>
+                                        </a>
+
+                                        <a class="text-danger" title="Excluir" data-image="del" href="#">
+                                            <i class="bi bi-x-circle-fill"></i>
+                                        </a>
+                                    </div>
+
+                                    <button id="removeAllButtonPinsMes" class="btn btn-sm btn-danger mb-0" disabled="disabled">Remover Pins</button>
+                                </div>
+
+                                <section class="container-img-pins">
+                                    <div class="wrapper-imgUpload">
+                                        <div class="content-imgUpload" data-containerPin="mes">
+                                            <img src="./assets/img/planta.jpg">
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center table-fixed" style="max-width: 700px;">
+                            <colgroup>
+                                <col style="width: 150px;">
+                                <col style="width: 10px;">
+
+                                <col style="width: 100px;">
+                                <col style="width: 100px;">
+                                <col style="width: 100px;">
+
+                                <col style="width: 10px;">
+
+                                <col style="width: 100px;">
+                                <col style="width: 100px;">
+                                <col style="width: 100px;">
+                            </colgroup>
+
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">Pins</th>
+                                    <th class="space"></th>
+
+                                    <th colspan="3">Quantidade</th>
+                                    <th class="space"></th>
+                                    <th colspan="3">Conformidade</th>
+                                </tr>
+
+                                <tr>
+                                    <th class="space"></th>
+
+                                    <th>Atual</th>
+                                    <th>Pro</th>
+                                    <th>Δ</th>
+
+                                    <th class="space"></th>
+
+                                    <th>Atual</th>
+                                    <th>Pro</th>
+                                    <th>Δ</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr data-tr="calc">
+                                    <td>
+                                        <div class="box-pin">
+                                            <div class="color-box pin-green" draggable="true" data-item="equipamentos" data-nameid="totens" data-title="Totens"></div>
+                                            <div class="color-box pin-red" draggable="true" data-item="equipamentos" data-nameid="totens" data-title="Totens"></div>
+                                            <span class="btn-show-hide" data-bs-toggle="tooltip" data-bs-title="Ocultar">Totens</span>
+                                        </div>
+                                    </td>
+                                    <th class="space"></th>
+
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>
+
+                                    <td class="space"></td>
+
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>
+                                </tr>
+
+                                <tr data-tr="calc">
+                                    <td>
+                                        <div class="box-pin">
+                                            <div class="color-box pin-green" draggable="true" data-item="equipamentos" data-nameid="quiosques" data-title="Quiosques"></div>
+                                            <div class="color-box pin-red" draggable="true" data-item="equipamentos" data-nameid="quiosques" data-title="Quiosques"></div>
+                                            <span class="btn-show-hide" data-bs-toggle="tooltip" data-bs-title="Ocultar">Quiosques</span>
+                                        </div>
+                                    </td>
+                                    <th class="space"></th>
+
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>
+
+                                    <td class="space"></td>
+                                    
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>
+                                </tr>
+
+                                <tr data-tr="calc">
+                                    <td>
+                                        <div class="box-pin">
+                                            <div class="color-box pin-green" draggable="true" data-item="equipamentos" data-nameid="comodato" data-title="Comodato"></div>
+                                            <div class="color-box pin-red" draggable="true" data-item="equipamentos" data-nameid="comodato" data-title="Comodato"></div>
+                                            <span class="btn-show-hide" data-bs-toggle="tooltip" data-bs-title="Ocultar">Comodato</span>
+                                        </div>
+                                    </td>
+                                    <th class="space"></th>
+                                    
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>
+
+                                    <td class="space"></td>
+                                    
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>			
+                                </tr>
+
+                                <tr data-tr="calc">
+                                    <td>
+                                        <div class="box-pin">
+                                            <div class="color-box pin-green" draggable="true" data-item="equipamentos" data-nameid="mobiliario" data-title="Mobiliário"></div>
+                                            <div class="color-box pin-red" draggable="true" data-item="equipamentos" data-nameid="mobiliario" data-title="Mobiliário"></div>
+                                            <span class="btn-show-hide" data-bs-toggle="tooltip" data-bs-title="Ocultar">Mobiliário</span>
+                                        </div>
+                                    </td>
+                                    <th class="space"></th>
+                                    
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>
+
+                                    <td class="space"></td>
+                                    
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>
+                                </tr>
+
+                                <tr data-tr="calc">
+                                    <td>
+                                        <div class="box-pin">
+                                            <div class="color-box pin-green" draggable="true" data-item="equipamentos" data-nameid="midia" data-title="Mídia"></div>
+                                            <div class="color-box pin-red" draggable="true" data-item="equipamentos" data-nameid="midia" data-title="Mídia"></div>
+                                            <span class="btn-show-hide" data-bs-toggle="tooltip" data-bs-title="Ocultar">Mídia</span>
+                                        </div>
+                                    </td>
+                                    <th class="space"></th>
+                                    
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>
+
+                                    <td class="space"></td>
+                                    
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>
+                                </tr>
+
+                                <tr data-tr="calc">
+                                    <td>
+                                        <div class="box-pin">
+                                            <div class="color-box pin-green" draggable="true" data-item="equipamentos" data-nameid="lixeiras" data-title="Lixeiras"></div>
+                                            <div class="color-box pin-red" draggable="true" data-item="equipamentos" data-nameid="lixeiras" data-title="Lixeiras"></div>
+                                            <span class="btn-show-hide" data-bs-toggle="tooltip" data-bs-title="Ocultar">Lixeiras</span>
+                                        </div>
+                                    </td>
+                                    <th class="space"></th>
+                                    
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>
+
+                                    <td class="space"></td>
+                                    
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>
+                                </tr>
+
+                                <tr data-tr="calc">
+                                    <td>
+                                        <div class="box-pin">
+                                            <div class="color-box pin-green" draggable="true" data-item="equipamentos" data-nameid="paisagismo" data-title="Paisagismo"></div>
+                                            <div class="color-box pin-red" draggable="true" data-item="equipamentos" data-nameid="paisagismo" data-title="Paisagismo"></div>
+                                            <span class="btn-show-hide" data-bs-toggle="tooltip" data-bs-title="Ocultar">Paisagismo</span>
+                                        </div>
+                                    </td>
+                                    <th class="space"></th>
+                                    
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>
+
+                                    <td class="space"></td>
+                                    
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>
+                                </tr>
+
+                                <tr data-tr="calc">
+                                    <td>
+                                        <div class="box-pin">
+                                            <div class="color-box pin-green" draggable="true" data-item="equipamentos" data-nameid="eventos" data-title="Eventos"></div>
+                                            <div class="color-box pin-red" draggable="true" data-item="equipamentos" data-nameid="eventos" data-title="Eventos"></div>
+                                            <span class="btn-show-hide" data-bs-toggle="tooltip" data-bs-title="Ocultar">Eventos</span>
+                                        </div>
+                                    </td>
+                                    <th class="space"></th>
+                                    
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>
+
+                                    <td class="space"></td>
+                                    
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" value="">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="10">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="" class="form-control fc text-center" min="0" readonly value="">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="./assets/js/pinDrop.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                pinDrop({
+                    imgContainerSelector: '[data-containerPin="proposta"]',
+                    removeAllButtonSelector: '#removeAllButtonPinsProposta',
+                    confirmMessage: 'Você quer mesmo apagar todos os pins da Proposta?'
+                });
+
+                pinDrop({
+                    imgContainerSelector: '[data-containerPin="mes"]',
+                    removeAllButtonSelector: '#removeAllButtonPinsMes',
+                    confirmMessage: 'Você quer mesmo apagar todos os pins do Mês?'
+                });
+            });
+        </script>
+    </body>
+</html>
