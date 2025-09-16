@@ -16,11 +16,22 @@ Ideal para mapas interativos, plantas baixas ou qualquer aplicação visual que 
 ```javascript
 pinDrop2({
     imgContainerSelector: 'seuSelector',    // Elemento que receberá os pinos
-    removeAllButtonSelector: 'seuSelector'. // Botão para limpar todos os pinos
-    confirmMessage: 'sua mensagem'          // Msg de confirmação para deletar
+    removeAllButtonSelector: 'seuSelector', // Botão para limpar todos os pinos
+    itemSelector: ''                        // Seletor Pin
+    btnShowHideSelector: '',                // Elemento oculta/mostra pin específico
+    confirmMessage: ''                      // Msg de confirmação para deletar
 });
 
 ```
+
+## ⚙️ Opções de Configuração
+| Parâmetro | Tipo | Default | Descrição |
+|-----------|------|---------|-----------|
+| `imgContainerSelector` | string | **obrigatório** | Seletor do container da imagem |
+| `removeAllButtonSelector` | string | **obrigatório** | Seletor do botão "Remover Todos" |
+| `itemSelector` | string | `'[data-item="pin"]'` | Seletor dos itens arrastáveis |
+| `btnShowHideSelector` | string | `'.btn-show-hide'` | Seletor dos botões show/hide |
+| `confirmMessage` | string | `'Tem certeza...'` | Mensagem de confirmação |
 
 ## ⚙️ Funcionalidades
 - Arrastar pinos da lista para o mapa

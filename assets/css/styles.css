@@ -146,23 +146,3 @@ input[type="number"] {
 .btn-show-hide.pin-hide{
     opacity: 0.6;
 }
-
-/* Cores dos pins */
-.pin-green {
-    background-color: #1ab394 !important;
-}
-
-.pin-red {
-    background-color: #e74c3c !important;
-}
-
-/* Se quiser manter a cor também nos pins na imagem */
-.pin.pin-green {
-    background-color: #1ab394 !important;
-    border: 2px solid #000;
-}
-
-.pin.pin-red {
-    background-color: #e74c3c !important;
-    border: 2px solid #000;
-}

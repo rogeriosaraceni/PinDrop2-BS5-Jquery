@@ -1,47 +1,8 @@
-function setupTogglePins() {
-    $('.btn-show-hide').off('click').on('click', function(e) {
-        e.preventDefault();
-        
-        const pinClicked = $(this);
-        const pinType = pinClicked.closest('tr').find('.color-box').first().data('nameid');
-        
-        // Verificar se existe algum pin deste tipo antes de prosseguir
-        const pinsDoTipo = $(`.pin[data-nameid="${pinType}"]`);
-        
-        if (pinsDoTipo.length === 0) {
-            console.log('Nenhum pin do tipo', pinType, 'para mostrar/ocultar');
-            
-            // Feedback visual de que não há pins
-            pinClicked.addClass('no-pins');
-            setTimeout(() => pinClicked.removeClass('no-pins'), 1000); // Remove após 1 segundo
-            
-            return; // Não faz nada se não houver pins
-        }
-        
-        // Remove a classe de feedback se existir
-        pinClicked.removeClass('no-pins');
-        
-        // Toggle na classe do botão e verifica estado
-        pinClicked.toggleClass('pin-hide');
-        const isNowHidden = pinClicked.hasClass('pin-hide');
-        pinClicked.attr('data-bs-title', isNowHidden ? 'Mostrar' : 'Ocultar');
-        
-        // Atualizar tooltip do Bootstrap
-        const element = pinClicked[0];
-        const existingInstance = bootstrap.Tooltip.getInstance(element);
-        if (existingInstance) existingInstance.dispose();
-        new bootstrap.Tooltip(element);
-        
-        // Esconder/mostrar os pins correspondentes
-        pinsDoTipo.toggle(!isNowHidden);
-        
-        console.log('Tipo:', pinType, 'Pins:', pinsDoTipo.length, 'Oculto?', isNowHidden);
-    });
-}
-
 function pinDrop2(options) {
     const imgContainer = $(options.imgContainerSelector);
     const removeAllButton = $(options.removeAllButtonSelector);
+    const itemSelector = options.itemSelector || '[data-item="pin"]';
+    const btnShowHideSelector = options.btnShowHideSelector || '.btn-show-hide';
     const confirmMessage = options.confirmMessage || 'Tem certeza que quer apagar todos os pinos do mapa?';
 
     let itemNameID = null;
@@ -55,75 +16,16 @@ function pinDrop2(options) {
     let contadorPinos = 0;
 
     /** -------------------------------------------------
-    * Atualiza botão remover todos
+    * Crea pins
     ----------------------------------------------------*/
-    function updateStateClearButton() {
-        removeAllButton.attr('disabled', pinsData.length === 0);
-    }
-
-    function savePin($pin, id) {
-        const pos = {
-            id: id,
-            nameid: String($pin.data('nameid')).toLowerCase(),
-            title: $pin.data('title'),
-            x: parseFloat($pin.css('left')),
-            y: parseFloat($pin.css('top'))
-        };
-        pinsData.push(pos);
-        updateStateClearButton();
-        updateCounters();
-
-        console.log(pinsData);
-    }
-
-    function updatePinPosition($pin) {
-        const id = $pin.data('id');
-        const idx = pinsData.findIndex(p => p.id === id);
-        if (idx !== -1) {
-            pinsData[idx].x = parseFloat($pin.css('left'));
-            pinsData[idx].y = parseFloat($pin.css('top'));
-        }
-        updateStateClearButton();
-    }
-
-    removeAllButton.on('click', function(e) {
-        e.stopImmediatePropagation(); // Impede outros event listeners
-        
-        if (confirm(confirmMessage)) {
-            // Remove apenas os pins deste container específico
-            const pinsToRemove = imgContainer.find('.pin');
-            
-            pinsToRemove.each(function() {
-                const tooltipInstance = bootstrap.Tooltip.getInstance(this);
-                if (tooltipInstance) tooltipInstance.dispose();
-            });
-            
-            // Remove dos dados
-            pinsToRemove.each(function() {
-                const id = $(this).data('id');
-                pinsData = pinsData.filter(p => p.id !== id);
-            });
-            
-            // Remove visualmente
-            pinsToRemove.remove();
-            
-            updateStateClearButton();
-            updateCounters();
-        }
-        
-        return false; // Previne comportamento padrão e bubbling
-    });
-
     function createPin(x, y, cor, nameid, title) {
         const id = 'pin-' + (++contadorPinos);
-        
-        // Determina a classe baseada na cor
-        const pinClass = cor === '#1ab394' ? 'pin-green' : 'pin-red';
 
-        const pin = $(`<div class="pin ${pinClass}" draggable="false" data-bs-toggle="tooltip" title="${title}"></div>`)
+        const pin = $(`<div class="pin" draggable="false" data-bs-toggle="tooltip" title="${title}"></div>`)
             .css({
                 left: x + 'px',
-                top: y + 'px'
+                top: y + 'px',
+                backgroundColor: cor
             })
             .attr('data-id', id)
             .attr('data-nameid', nameid)
@@ -139,6 +41,135 @@ function pinDrop2(options) {
         console.log(contadorPinos);
     }
 
+    /** -------------------------------------------------
+    * Salva Pins com id
+    ----------------------------------------------------*/
+    function savePin($pin, id) {
+        const pos = {
+            id: id,
+            nameid: String($pin.data('nameid')).toLowerCase(),
+            title: $pin.data('title'),
+            x: parseFloat($pin.css('left')),
+            y: parseFloat($pin.css('top'))
+        };
+        pinsData.push(pos);
+        updateStateClearButton();
+        updateCounters();
+        console.log(pinsData);
+    }
+    
+    /** -------------------------------------------------
+    * Oculta ou mostra pin conforme item
+    ----------------------------------------------------*/
+    function setupTogglePins() {
+        $(btnShowHideSelector).off('click').on('click', function (e) {
+            e.preventDefault();
+            
+            const pinClicked = $(this);
+            const pinType = pinClicked.closest('tr').find(itemSelector).first().data('nameid');
+            
+            // Verificar se existe algum pin deste tipo antes de prosseguir
+            const pinsDoTipo = $(`.pin[data-nameid="${pinType}"]`);
+            
+            if (pinsDoTipo.length === 0) {
+                console.log('Nenhum pin do tipo', pinType, 'para mostrar/ocultar');
+                
+                // Feedback visual de que não há pins
+                pinClicked.addClass('no-pins');
+                setTimeout(() => pinClicked.removeClass('no-pins'), 1000);
+                return;
+            }
+            
+            pinClicked.removeClass('no-pins');
+            pinClicked.toggleClass('pin-hide');
+            const isNowHidden = pinClicked.hasClass('pin-hide');
+            pinClicked.attr('data-bs-title', isNowHidden ? 'Mostrar' : 'Ocultar');
+            
+            const element = pinClicked[0];
+            const existingInstance = bootstrap.Tooltip.getInstance(element);
+            if (existingInstance) existingInstance.dispose();
+            new bootstrap.Tooltip(element);
+            
+            pinsDoTipo.toggle(!isNowHidden);
+            
+            console.log('Tipo:', pinType, 'Pins:', pinsDoTipo.length, 'Oculto?', isNowHidden);
+        });
+    }
+    
+    /** -------------------------------------------------
+    * Remove todos os pins do container específico
+    ----------------------------------------------------*/
+    function setupRemoveAllButton() {
+        removeAllButton.off('click').on('click', function(e) {
+            e.stopImmediatePropagation();
+            
+            if (confirm(confirmMessage)) {
+                // Remove apenas os pins deste container específico
+                const pinsToRemove = imgContainer.find('.pin');
+                
+                pinsToRemove.each(function() {
+                    const tooltipInstance = bootstrap.Tooltip.getInstance(this);
+                    if (tooltipInstance) tooltipInstance.dispose();
+                });
+                
+                // Remove dos dados
+                pinsToRemove.each(function() {
+                    const id = $(this).data('id');
+                    pinsData = pinsData.filter(p => p.id !== id);
+                });
+                
+                // Remove visualmente
+                pinsToRemove.remove();
+                
+                updateStateClearButton();
+                updateCounters();
+                
+                console.log('Pins removidos do container:', options.imgContainerSelector);
+            }
+            
+            return false;
+        });
+    }
+
+    /** -------------------------------------------------
+    * Remove pind com duplo click
+    ----------------------------------------------------*/
+    function removePinDobleClick($pin) {
+        const tooltipInstance = bootstrap.Tooltip.getInstance($pin[0]);
+        if (tooltipInstance) tooltipInstance.dispose();
+        
+        const id = $pin.data('id');
+        pinsData = pinsData.filter(p => p.id !== id);
+        $pin.remove();
+        
+        updateStateClearButton();
+        updateCounters();
+        console.log('Pin removido:', id);
+    }
+
+    /** -------------------------------------------------
+    * Atualiza botão remover todos
+    ----------------------------------------------------*/
+    function updateStateClearButton() {
+        removeAllButton.attr('disabled', pinsData.length === 0);
+    }
+
+    /** -------------------------------------------------
+    * Atualiza posição do pin
+    ----------------------------------------------------*/
+    function updatePinPosition($pin) {
+        const id = $pin.data('id');
+        const idx = pinsData.findIndex(p => p.id === id);
+        if (idx !== -1) {
+            pinsData[idx].x = parseFloat($pin.css('left'));
+            pinsData[idx].y = parseFloat($pin.css('top'));
+        }
+        updateStateClearButton();
+    }
+
+    /** -------------------------------------------------
+    * Atualiza contagem
+    ----------------------------------------------------*/
     function updateCounters() {
         $('[data-selected]').val(0);
 
@@ -153,11 +184,12 @@ function pinDrop2(options) {
         });
     }
 
+
     /** -------------------------------------------------
     * Eventos
     ----------------------------------------------------*/
-    $('[data-item="equipamentos"]').on('dragstart', function () {
-        itemColor = $(this).hasClass('pin-green') ? '#1ab394' : '#e74c3c';
+    $(itemSelector).on('dragstart', function () {
+        itemColor = $(this).css("background-color");
         itemNameID = $(this).data("nameid");
         itemTitle = $(this).data("title");
     });
@@ -207,26 +239,13 @@ function pinDrop2(options) {
     });
 
     $(document).on('dblclick', '.pin', function() {
-        removePin($(this));
+        removePinDobleClick($(this));
     });
-
-    removeAllButton.on('click', function() {
-        if (confirm(confirmMessage)) {
-            $('.pin').each(function() {
-                const tooltipInstance = bootstrap.Tooltip.getInstance(this);
-                if (tooltipInstance) tooltipInstance.dispose();
-            });
-            $('.pin').remove();
-            pinsData = [];
-            updateStateClearButton();
-            updateCounters();
-        }
-    });
-
-    setupTogglePins();
 
     /** -------------------------------------------------
-    * Estado inicial
+    * Inicialização
     ----------------------------------------------------*/
+    setupRemoveAllButton();
+    setupTogglePins();
     updateStateClearButton();
 }
