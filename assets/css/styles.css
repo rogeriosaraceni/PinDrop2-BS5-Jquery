@@ -21,6 +21,17 @@ td.space{
     font-size: 0.9rem;
 }
 
+/**----------------------------------------------------------------------------
+* input[type="number"]
+-----------------------------------------------------------------------------*/
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
 
 
 /**----------------------------------------------------------------------------
@@ -96,20 +107,6 @@ td.space{
         flex-direction: column;
     }
 }
-
-/**----------------------------------------------------------------------------
-* input[type="number"]
------------------------------------------------------------------------------*/
-input[type="number"]::-webkit-inner-spin-button, 
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-}
-input[type="number"] {
-    appearance: textfield;
-    -moz-appearance: textfield;
-}
-
-
 
 /**----------------------------------------------------------------------------
 * list-pins
