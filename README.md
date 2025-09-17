@@ -1,6 +1,6 @@
-# pinDrop2 Jquery
+# pinDrop2 BS5 Jquery
 
-**pinDro2p** é um plugin em jQuery que permite arrastar e soltar pinos sobre uma imagem, podendo movê-los, removê-los e limpar todos de uma vez.  
+**pinDro2** é um plugin em jQuery que permite arrastar e soltar pinos sobre uma imagem, podendo movê-los, removê-los e limpar todos de uma vez.  
 Ideal para mapas interativos, plantas baixas ou qualquer aplicação visual que exija posicionamento dinâmico de marcadores.
 
 ---
@@ -17,7 +17,7 @@ Ideal para mapas interativos, plantas baixas ou qualquer aplicação visual que 
 pinDrop2({
     imgContainerSelector: 'seuSelector',    // Elemento que receberá os pinos
     removeAllButtonSelector: 'seuSelector', // Botão para limpar todos os pinos
-    itemSelector: ''                        // Seletor Pin
+    itemSelector: '',                       // Seletor Pin
     btnShowHideSelector: '',                // Elemento oculta/mostra pin específico
     confirmMessage: ''                      // Msg de confirmação para deletar
 });
@@ -34,12 +34,12 @@ pinDrop2({
 | `confirmMessage` | string | `'Tem certeza...'` | Mensagem de confirmação |
 
 ## ⚙️ Funcionalidades
-- Arrastar pinos da lista para o mapa
-- Mover pinos dentro do mapa (mantendo dentro dos limites da imagem)
+- Arrastar pinos da lista para o container
+- Mover pinos dentro do container (mantendo dentro dos limites da imagem)
 - Remover pino clicando com o botão direito (ou pressionando Alt + clique)
 - Botão limpar para remover todos os pinos de uma vez
 
 ## 📝 Observações
 - O tooltip é removido automaticamente quando o pino é deletado.
-- O botão "Limpar Pinos" é ativado/desativado conforme existam pinos no mapa.
+- O botão "Limpar Pis" é ativado/desativado conforme existam pinos no container.
 - Caso o Bootstrap Tooltip não esteja presente, basta remover as partes relacionadas a ele no código.
