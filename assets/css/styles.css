@@ -114,11 +114,11 @@ input[type="number"] {
 /**----------------------------------------------------------------------------
 * list-pins
 -----------------------------------------------------------------------------*/
-.box-pin{
+.boxPin{
     display: flex;
     gap: 0.5rem;
 }
-.color-box {
+.circlePin {
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -135,14 +135,14 @@ input[type="number"] {
     cursor: grab;
 }
 
-.btn-show-hide{
+.btnPin-show-hide{
     cursor: pointer;
 }
-.btn-show-hide.no-pins {
+.btnPin-show-hide.no-pins {
     opacity: 0.4;
     cursor: not-allowed;
     color: #999;
 }
-.btn-show-hide.pin-hide{
+.btnPin-show-hide.pin-hide{
     opacity: 0.6;
 }
